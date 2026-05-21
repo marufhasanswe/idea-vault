@@ -1,5 +1,6 @@
 "use client";
 
+import { authClient } from "@/lib/auth-client";
 import { Check } from "@gravity-ui/icons";
 import {
   Button,
@@ -13,11 +14,26 @@ import {
   TextField,
 } from "@heroui/react";
 import { FcGoogle } from "react-icons/fc";
+import { toast } from "react-toastify";
 
 const LoginPage = () => {
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
+    const userData = Object.fromEntries(formData.entries());
+
+    const { data, error } = await authClient.signIn.email({
+      email: userData?.email,
+      password: userData?.password,
+      callbackURL: "/",
+    });
+
+    if (error) {
+      toast.error(error.message);
+    }
+    if (data?.user) {
+      toast.success("Successfully logged-in!");
+    }
   };
 
   return (
