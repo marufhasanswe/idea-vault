@@ -14,7 +14,7 @@ import {
   TextField,
 } from "@heroui/react";
 import Link from "next/link";
-import { redirect, useRouter, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { FcGoogle } from "react-icons/fc";
 import { toast } from "react-toastify";
 
@@ -45,6 +45,7 @@ const LoginPage = () => {
   const handleGoogleSignIn = async () => {
     const data = await authClient.signIn.social({
       provider: "google",
+      callbackURL: redirectPath,
     });
     console.log(data);
   };
