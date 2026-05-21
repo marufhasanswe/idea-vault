@@ -13,6 +13,7 @@ import {
   Separator,
   TextField,
 } from "@heroui/react";
+import { createAuthClient } from "better-auth/client";
 import { FcGoogle } from "react-icons/fc";
 import { toast } from "react-toastify";
 
@@ -34,6 +35,13 @@ const LoginPage = () => {
     if (data?.user) {
       toast.success("Successfully logged-in!");
     }
+  };
+
+  const handleGoogleSignIn = async () => {
+    await authClient.signIn.social({
+      provider: "google",
+      callbackURL: "/",
+    });
   };
 
   return (
@@ -105,7 +113,12 @@ const LoginPage = () => {
               <div className="text-muted-foreground whitespace-nowrap">Or</div>
               <Separator />
             </div>
-            <Button className="w-full" variant="tertiary">
+            <Button
+              type="button"
+              onClick={handleGoogleSignIn}
+              className="w-full"
+              variant="tertiary"
+            >
               <FcGoogle />
               Sign in with Google
             </Button>

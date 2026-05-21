@@ -39,6 +39,12 @@ const RegisterPage = () => {
     console.log(data, error);
   };
 
+  const handleGoogleSignIn = async () => {
+    await authClient.signIn.social({
+      provider: "google",
+    });
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-background px-4">
       <Card className="w-full max-w-md space-y-6 border border-gray-100">
@@ -115,7 +121,12 @@ const RegisterPage = () => {
               <div className="text-muted-foreground whitespace-nowrap">Or</div>
               <Separator />
             </div>
-            <Button className="w-full" variant="tertiary">
+            <Button
+              onClick={handleGoogleSignIn}
+              type="button"
+              className="w-full"
+              variant="tertiary"
+            >
               <FcGoogle />
               Sign in with Google
             </Button>
