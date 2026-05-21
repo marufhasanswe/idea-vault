@@ -3,9 +3,29 @@
 import { useState } from "react";
 import { Link, Button } from "@heroui/react";
 import { ThemeToggle } from "./ThemeToggle";
+import MyNavLink from "./MyNavLink";
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  const links = (
+    <>
+      <li>
+        <MyNavLink href={"/"}>Home</MyNavLink>
+      </li>
+      <li>
+        <MyNavLink href={"/ideas"}>Ideas</MyNavLink>
+      </li>
+      <li>
+        <MyNavLink href={"/add-idea"}>Add Idea</MyNavLink>
+      </li>
+      <li>
+        <MyNavLink href={"/my-ideas"}>My Ideas</MyNavLink>
+      </li>
+      <li>
+        <MyNavLink href={"/my-ideas"}>My Interactions</MyNavLink>
+      </li>
+    </>
+  );
   return (
     <nav className="sticky top-0 z-40 w-full border-b border-separator bg-background/70 backdrop-blur-lg">
       <header className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
@@ -42,26 +62,13 @@ const Navbar = () => {
           </button>
           <div className="flex items-center gap-3">
             {/* <h3>IDEA VAULT LOGO</h3> */}
-            <p className="font-bold">IDEA VAULT</p>
+            <p className="bg-gradient-to-r from-[#4BB8FA] to-[#2C5EAD] bg-clip-text text-3xl font-extrabold text-transparent">
+              IDEA VAULT
+            </p>
           </div>
         </div>
-        <ul className="hidden items-center gap-4 md:flex">
-          <li>
-            <Link href="#">Features</Link>
-          </li>
-          <li>
-            <Link
-              href="#"
-              className="font-medium text-accent"
-              aria-current="page"
-            >
-              Dashboard
-            </Link>
-          </li>
-          <li>
-            <Link href="#">Pricing</Link>
-          </li>
-        </ul>
+        <ul className="hidden items-center gap-4 md:flex">{links}</ul>
+
         <div className="hidden items-center gap-4 md:flex">
           <ThemeToggle></ThemeToggle>
           <Link href="#">Login</Link>
@@ -70,29 +77,7 @@ const Navbar = () => {
       </header>
       {isMenuOpen && (
         <div className="border-t border-separator md:hidden">
-          <ul className="flex flex-col gap-2 p-4">
-            <li>
-              <Link href="#" className="block py-2">
-                Features
-              </Link>
-            </li>
-            <li>
-              <Link href="#" className="block py-2 font-medium text-accent">
-                Dashboard
-              </Link>
-            </li>
-            <li>
-              <Link href="#" className="block py-2">
-                Pricing
-              </Link>
-            </li>
-            <li className="mt-4 flex flex-col gap-2 border-t border-separator pt-4">
-              <Link href="#" className="block py-2">
-                Login
-              </Link>
-              <Button className="w-full">Sign Up</Button>
-            </li>
-          </ul>
+          <ul className="flex flex-col gap-2 p-4">{links}</ul>
         </div>
       )}
     </nav>
