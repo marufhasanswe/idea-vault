@@ -9,7 +9,7 @@ const MyNavLink = ({ href, children, className }) => {
     <>
       <Link
         href={href}
-        className={`${isActive && "text-[#1591DC] border-b border-[#1591DC]  font-medium"}  hover:text-[#1591DC]  py-1  ${className}`}
+        className={`text-foreground ${isActive && "text-[#1591DC]! border-b border-[#1591DC]  font-medium"}   hover:text-[#1591DC]  py-1  ${className}`}
       >
         {children}
       </Link>

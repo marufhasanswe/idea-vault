@@ -22,7 +22,7 @@ const Navbar = () => {
         <MyNavLink href={"/my-ideas"}>My Ideas</MyNavLink>
       </li>
       <li>
-        <MyNavLink href={"/my-ideas"}>My Interactions</MyNavLink>
+        <MyNavLink href={"/my-interactions"}>My Interactions</MyNavLink>
       </li>
     </>
   );
@@ -71,8 +71,10 @@ const Navbar = () => {
 
         <div className="hidden items-center gap-4 md:flex">
           <ThemeToggle></ThemeToggle>
-          <Link href="#">Login</Link>
-          <Button>Sign Up</Button>
+          <Link href="login">Login</Link>
+          <Link href="register">
+            <Button>Sign Up</Button>
+          </Link>
         </div>
       </header>
       {isMenuOpen && (
