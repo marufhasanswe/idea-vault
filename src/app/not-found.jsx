@@ -14,7 +14,7 @@ const NotFoundPage = () => {
         </div>
 
         {/* 404 number */}
-        <h1 className="text-[90px] sm:text-[120px] font-extrabold tracking-tight text-primary leading-none">
+        <h1 className="text-[90px] sm:text-[120px] font-extrabold tracking-tight text-[#4BB8FA] leading-none">
           404
         </h1>
 
@@ -32,7 +32,7 @@ const NotFoundPage = () => {
         {/* Buttons */}
         <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
           <Link href="/">
-            <Button className="w-full sm:w-auto bg-primary text-primary-foreground hover:opacity-90 flex items-center">
+            <Button className="w-full sm:w-auto bg-[#4BB8FA] text-primary-foreground hover:opacity-90 flex items-center">
               <FaHome /> Go Home
             </Button>
           </Link>

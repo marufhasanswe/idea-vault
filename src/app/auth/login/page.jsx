@@ -13,12 +13,16 @@ import {
   Separator,
   TextField,
 } from "@heroui/react";
-import { createAuthClient } from "better-auth/client";
 import Link from "next/link";
+import { redirect, useRouter, useSearchParams } from "next/navigation";
 import { FcGoogle } from "react-icons/fc";
 import { toast } from "react-toastify";
 
 const LoginPage = () => {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const redirectPath = searchParams.get("redirect") || "/";
   const onSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -34,14 +38,13 @@ const LoginPage = () => {
     }
     if (data?.user) {
       toast.success("Successfully logged-in!");
+      router.replace(redirectPath);
     }
-    console.log(data.user);
   };
 
   const handleGoogleSignIn = async () => {
     const data = await authClient.signIn.social({
       provider: "google",
-      callbackURL: "/",
     });
     console.log(data);
   };

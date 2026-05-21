@@ -13,7 +13,6 @@ import {
   Separator,
   TextField,
 } from "@heroui/react";
-import Link from "next/link";
 import { redirect } from "next/navigation";
 import { FcGoogle } from "react-icons/fc";
 import { toast } from "react-toastify";
@@ -35,7 +34,7 @@ const RegisterPage = () => {
     }
     if (data?.user) {
       toast.success("Successfully Registerd!");
-      redirect("/auth/login");
+      redirect("/");
     }
     console.log(data, error);
   };

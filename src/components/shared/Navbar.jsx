@@ -7,6 +7,7 @@ import { ThemeToggle } from "./ThemeToggle";
 import MyNavLink from "./MyNavLink";
 import Link from "next/link";
 import { toast } from "react-toastify";
+import { redirect } from "next/navigation";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -16,6 +17,7 @@ const Navbar = () => {
   const handleSignOut = async () => {
     await authClient.signOut();
     toast.success("Signing out successfully!");
+    redirect("/auth/login");
   };
 
   const links = (
