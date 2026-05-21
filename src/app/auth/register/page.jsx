@@ -13,6 +13,7 @@ import {
   Separator,
   TextField,
 } from "@heroui/react";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 import { FcGoogle } from "react-icons/fc";
 import { toast } from "react-toastify";
@@ -26,7 +27,7 @@ const RegisterPage = () => {
     const { data, error } = await authClient.signUp.email({
       email: userData?.email,
       password: userData?.password,
-      name: userData?.password,
+      name: userData?.name,
       image: userData?.image,
     });
     if (error) {
@@ -47,7 +48,7 @@ const RegisterPage = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-background px-4">
-      <Card className="w-full max-w-md space-y-6 border border-gray-100">
+      <Card className="w-full max-w-md space-y-6 border border-gray-100 md:py-12 md:px-8 px-4 py-10">
         {/* Header */}
         <div className="text-center space-y-2">
           <h1 className="text-2xl font-bold text-foreground">Register</h1>
@@ -114,8 +115,9 @@ const RegisterPage = () => {
           <div className="flex flex-col gap-2 pt-2">
             <Button type="submit" className="w-full ">
               <Check />
-              Log in
+              Register
             </Button>
+
             <div className="flex justify-center items-center gap-3">
               <Separator />
               <div className="text-muted-foreground whitespace-nowrap">Or</div>

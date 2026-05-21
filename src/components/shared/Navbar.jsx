@@ -1,12 +1,22 @@
 "use client";
 
+import { authClient } from "@/lib/auth-client";
 import { useState } from "react";
 import { Button } from "@heroui/react";
 import { ThemeToggle } from "./ThemeToggle";
 import MyNavLink from "./MyNavLink";
 import Link from "next/link";
+import { toast } from "react-toastify";
+
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { data: session } = authClient.useSession();
+  const user = session?.user;
+
+  const handleSignOut = async () => {
+    await authClient.signOut();
+    toast.success("Signing out successfully!");
+  };
 
   const links = (
     <>
@@ -63,7 +73,7 @@ const Navbar = () => {
           </button>
           <div className="flex items-center gap-3">
             {/* <h3>IDEA VAULT LOGO</h3> */}
-            <p className="bg-gradient-to-r from-[#4BB8FA] to-[#2C5EAD] bg-clip-text text-3xl font-extrabold text-transparent">
+            <p className="bg-linear-to-r from-[#4BB8FA] to-[#2C5EAD] bg-clip-text text-3xl font-extrabold text-transparent">
               IDEA VAULT
             </p>
           </div>
@@ -72,10 +82,19 @@ const Navbar = () => {
 
         <div className="hidden items-center gap-4 md:flex">
           <ThemeToggle></ThemeToggle>
-          <Link href="/auth/login">Login</Link>
-          <Link href="/auth/register" className={"underline"}>
-            <Button className={""}>Register</Button>
-          </Link>
+          {user ? (
+            <Button onClick={handleSignOut} variant="secondary" className={""}>
+              Sign Out
+            </Button>
+          ) : (
+            <>
+              {" "}
+              <Link href="/auth/login">Login</Link>
+              <Link href="/auth/register" className={"underline"}>
+                <Button className={""}>Register</Button>
+              </Link>
+            </>
+          )}
         </div>
       </header>
       {isMenuOpen && (

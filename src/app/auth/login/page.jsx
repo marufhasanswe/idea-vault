@@ -14,6 +14,7 @@ import {
   TextField,
 } from "@heroui/react";
 import { createAuthClient } from "better-auth/client";
+import Link from "next/link";
 import { FcGoogle } from "react-icons/fc";
 import { toast } from "react-toastify";
 
@@ -26,7 +27,6 @@ const LoginPage = () => {
     const { data, error } = await authClient.signIn.email({
       email: userData?.email,
       password: userData?.password,
-      callbackURL: "/",
     });
 
     if (error) {
@@ -35,18 +35,20 @@ const LoginPage = () => {
     if (data?.user) {
       toast.success("Successfully logged-in!");
     }
+    console.log(data.user);
   };
 
   const handleGoogleSignIn = async () => {
-    await authClient.signIn.social({
+    const data = await authClient.signIn.social({
       provider: "google",
       callbackURL: "/",
     });
+    console.log(data);
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-background px-4">
-      <Card className="w-full max-w-md space-y-6 border border-gray-100">
+      <Card className="w-full max-w-md space-y-6 border border-gray-100 md:py-12 md:px-8 px-4 py-10">
         {/* Header */}
         <div className="text-center space-y-2">
           <h1 className="text-2xl font-bold text-foreground">Login</h1>
@@ -105,9 +107,17 @@ const LoginPage = () => {
               <Check />
               Log in
             </Button>
-            <p className="text-blue-500 cursor-pointer text-sm">
-              Reset password
-            </p>
+            <div className="flex gap-4">
+              <p className="text-blue-500 cursor-pointer text-sm">
+                Reset password
+              </p>
+              <Link
+                href={"/auth/register"}
+                className="text-blue-500 cursor-pointer text-sm"
+              >
+                Register
+              </Link>
+            </div>
             <div className="flex justify-center items-center gap-3">
               <Separator />
               <div className="text-muted-foreground whitespace-nowrap">Or</div>
