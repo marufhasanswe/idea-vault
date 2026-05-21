@@ -1,5 +1,21 @@
 @import "tailwindcss";
-@import "@heroui/styles"; 
+@import "@heroui/styles";
+
+@theme {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+
+  --color-border: hsl(var(--border));
+}
 
 :root {
   --background: 0 0% 100%;
@@ -10,6 +26,9 @@
 
   --primary: 262 83% 58%;
   --primary-foreground: 0 0% 100%;
+
+  --muted: 210 40% 96%;
+  --muted-foreground: 215.4 16.3% 46.9%;
 
   --border: 214.3 31.8% 91.4%;
 }
@@ -23,6 +42,9 @@
 
   --primary: 262 83% 65%;
   --primary-foreground: 0 0% 100%;
+
+  --muted: 217 32% 12%;
+  --muted-foreground: 215 20% 65%;
 
   --border: 217 32% 17%;
 }

@@ -14,7 +14,7 @@ import {
 } from "@heroui/react";
 import { FcGoogle } from "react-icons/fc";
 
-const LoginPage = () => {
+const RegisterPage = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -25,15 +25,25 @@ const LoginPage = () => {
       <Card className="w-full max-w-md space-y-6 border border-gray-100">
         {/* Header */}
         <div className="text-center space-y-2">
-          <h1 className="text-2xl font-bold text-foreground">Login</h1>
-          <p className="text-sm text-muted-foreground">
-            Login to share your innovative idea and feedback.
+          <h1 className="text-2xl font-bold text-foreground">Register</h1>
+          <p className="text-sm text-gray-500">
+            Register to share your innovative idea and feedback.
           </p>
         </div>
 
         {/* Form */}
         <Form className="flex flex-col gap-4" onSubmit={onSubmit}>
           {/* Email */}
+          <TextField isRequired name="name" type="text">
+            <Label>Name</Label>
+            <Input placeholder="Enter Your Name" />
+            <FieldError />
+          </TextField>
+          <TextField isRequired name="image" type="url">
+            <Label>Image URL</Label>
+            <Input placeholder="Enter image url" />
+            <FieldError />
+          </TextField>
           <TextField
             isRequired
             name="email"
@@ -81,9 +91,6 @@ const LoginPage = () => {
               <Check />
               Log in
             </Button>
-            <p className="text-blue-500 cursor-pointer text-sm">
-              Reset password
-            </p>
             <div className="flex justify-center items-center gap-3">
               <Separator />
               <div className="text-muted-foreground whitespace-nowrap">Or</div>
@@ -100,4 +107,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default RegisterPage;

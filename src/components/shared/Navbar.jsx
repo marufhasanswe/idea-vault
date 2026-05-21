@@ -1,9 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { Link, Button } from "@heroui/react";
+import { Button } from "@heroui/react";
 import { ThemeToggle } from "./ThemeToggle";
 import MyNavLink from "./MyNavLink";
+import Link from "next/link";
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -71,9 +72,9 @@ const Navbar = () => {
 
         <div className="hidden items-center gap-4 md:flex">
           <ThemeToggle></ThemeToggle>
-          <Link href="login">Login</Link>
-          <Link href="register">
-            <Button>Sign Up</Button>
+          <Link href="/auth/login">Login</Link>
+          <Link href="/auth/register" className={"underline"}>
+            <Button className={""}>Register</Button>
           </Link>
         </div>
       </header>
