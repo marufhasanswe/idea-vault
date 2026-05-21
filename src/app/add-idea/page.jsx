@@ -80,7 +80,7 @@ const AddIdeaPage = () => {
                 <Select
                   name="category"
                   isRequired
-                  className="w-full"
+                  className="w-full text-muted-foreground"
                   placeholder="Select category"
                 >
                   <Label className="mb-2 text-sm font-medium">Category</Label>
@@ -124,7 +124,7 @@ const AddIdeaPage = () => {
                 <Input
                   type="number"
                   placeholder="5000"
-                  className="input-style rounded-2xl h-12 shadow-sm"
+                  className="input-style rounded-2xl h-12 shadow-sm placeholder:text-muted-foreground"
                 />
 
                 <FieldError />
@@ -137,8 +137,8 @@ const AddIdeaPage = () => {
 
                   <Input
                     type="url"
-                    placeholder="https://example.com/startup-image.jpg"
-                    className="input-style rounded-2xl h-12 shadow-sm"
+                    placeholder="Enter image url"
+                    className="input-style rounded-2xl h-12 shadow-sm placeholder:text-muted-foreground"
                   />
 
                   <FieldError />
@@ -152,7 +152,7 @@ const AddIdeaPage = () => {
 
                   <Input
                     placeholder="AI, Startup, SaaS"
-                    className="input-style rounded-2xl h-12 shadow-sm"
+                    className="input-style rounded-2xl h-12 shadow-sm placeholder:text-muted-foreground"
                   />
 
                   <FieldError />
@@ -168,7 +168,7 @@ const AddIdeaPage = () => {
 
                   <Input
                     placeholder="Students, Developers, Entrepreneurs"
-                    className="input-style rounded-2xl h-12 shadow-sm"
+                    className="input-style rounded-2xl h-12 shadow-sm placeholder:text-muted-foreground"
                   />
 
                   <FieldError />
@@ -184,7 +184,7 @@ const AddIdeaPage = () => {
 
                   <TextArea
                     placeholder="Write a short overview about your startup idea..."
-                    className="input-style rounded-3xl shadow-sm"
+                    className="input-style rounded-2xl shadow-sm placeholder:text-muted-foreground"
                   />
 
                   <FieldError />
@@ -194,13 +194,13 @@ const AddIdeaPage = () => {
               {/* Detailed Description */}
               <div className="md:col-span-1">
                 <TextField name="detailedDescription" isRequired>
-                  <Label className="mb-2 text-sm font-medium">
+                  <Label className="mb-2 text-sm font-medium ">
                     Detailed Description
                   </Label>
 
                   <TextArea
                     placeholder="Explain your startup idea in detail..."
-                    className="input-style rounded-3xl shadow-sm"
+                    className="input-style rounded-2xl shadow-sm placeholder:text-muted-foreground"
                   />
 
                   <FieldError />
@@ -216,7 +216,7 @@ const AddIdeaPage = () => {
 
                   <TextArea
                     placeholder="What problem does your startup solve?"
-                    className="input-style rounded-3xl shadow-sm"
+                    className="input-style rounded-2xl shadow-sm placeholder:text-muted-foreground"
                   />
 
                   <FieldError />
@@ -232,7 +232,7 @@ const AddIdeaPage = () => {
 
                   <TextArea
                     placeholder="Describe your proposed solution..."
-                    className="input-style rounded-3xl shadow-sm"
+                    className="input-style rounded-2xl shadow-sm placeholder:text-muted-foreground"
                   />
 
                   <FieldError />
