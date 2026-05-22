@@ -10,8 +10,9 @@ import {
   TextArea,
   TextField,
 } from "@heroui/react";
+import { toast } from "react-toastify";
 
-const CommentEditModal = ({ comment }) => {
+const CommentEditModal = ({ comment, onDelete }) => {
   const handleEdit = async (e) => {
     e.preventDefault();
     const updatedComment = e.target.comment.value;
@@ -23,6 +24,10 @@ const CommentEditModal = ({ comment }) => {
       body: JSON.stringify({ comment: updatedComment }),
     });
     const data = await res.json();
+    if (data?.modifiedCount > 0) {
+      toast.success("Successfully comment edited!");
+      window.location.reload();
+    }
     console.log(data);
   };
 
@@ -57,12 +62,13 @@ const CommentEditModal = ({ comment }) => {
                   </TextField>
 
                   <div className="flex justify-end">
-                    <button
+                    <Button
+                      slot={"close"}
                       type="submit"
                       className="rounded-2xl bg-[#4BB8FA] px-5 py-2 text-sm font-medium text-primary-foreground hover:opacity-90"
                     >
                       Update Comment
-                    </button>
+                    </Button>
                   </div>
                 </Form>
               </Surface>

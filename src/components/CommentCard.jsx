@@ -1,7 +1,8 @@
 import React from "react";
 import CommentEditModal from "./CommentEditModal";
+import CommentDeleteAlert from "./CommentDeleteAlert";
 
-const CommentCard = ({ comment }) => {
+const CommentCard = ({ comment, onDelete }) => {
   return (
     <div className="rounded-2xl border border-border bg-background p-4">
       <div className="flex items-start justify-between">
@@ -16,8 +17,8 @@ const CommentCard = ({ comment }) => {
         </div>
 
         <div className="flex gap-2 text-xs">
-          <CommentEditModal comment={comment} />
-          <button className="text-red-500 hover:underline">Delete</button>
+          <CommentEditModal onDelete={onDelete} comment={comment} />
+          <CommentDeleteAlert onDelete={onDelete} comment={comment} />
         </div>
       </div>
 

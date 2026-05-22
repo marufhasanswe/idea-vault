@@ -44,7 +44,16 @@ const CommunityFeedback = ({ ideaId }) => {
     const data = await res.json();
     if (data?.insertedId) {
       toast.success("Your comment successfully added!");
-      window.location.reload();
+      setComments((prev) => [
+        {
+          ...commentData,
+          _id: data.insertedId,
+        },
+        ...prev,
+      ]);
+
+      // optional: clear input
+      e.target.reset();
     }
     console.log(data);
   };
@@ -55,7 +64,9 @@ const CommunityFeedback = ({ ideaId }) => {
         <div className="flex items-center justify-between">
           <h2 className="text-lg font-semibold">Community Feedback</h2>
 
-          <span className="text-xs text-muted-foreground">3 Comments</span>
+          <span className="text-xs text-muted-foreground">
+            {comments ? comments.length : "0"} Comments
+          </span>
         </div>
 
         {/* ADD COMMENT BOX */}
@@ -85,7 +96,13 @@ const CommunityFeedback = ({ ideaId }) => {
         <div className="space-y-4">
           {/* COMMENT CARD */}
           {comments.map((comment) => (
-            <CommentCard key={comment._id} comment={comment} />
+            <CommentCard
+              key={comment._id}
+              comment={comment}
+              onDelete={(id) => {
+                setComments((prev) => prev.filter((c) => c._id !== id));
+              }}
+            />
           ))}
         </div>
       </div>
