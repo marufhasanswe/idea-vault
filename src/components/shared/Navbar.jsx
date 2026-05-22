@@ -2,12 +2,13 @@
 
 import { authClient } from "@/lib/auth-client";
 import { useState } from "react";
-import { Button } from "@heroui/react";
+import { Avatar, Button } from "@heroui/react";
 import { ThemeToggle } from "./ThemeToggle";
 import MyNavLink from "./MyNavLink";
 import Link from "next/link";
 import { toast } from "react-toastify";
 import { redirect } from "next/navigation";
+import ProfileDropdown from "../ProfileDropdown";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -82,26 +83,64 @@ const Navbar = () => {
         </div>
         <ul className="hidden items-center gap-4 md:flex">{links}</ul>
 
-        <div className="hidden items-center gap-4 md:flex">
+        <div className="flex items-center gap-2">
           <ThemeToggle></ThemeToggle>
-          {user ? (
-            <Button onClick={handleSignOut} variant="secondary" className={""}>
-              Sign Out
-            </Button>
-          ) : (
-            <>
-              {" "}
-              <Link href="/auth/login">Login</Link>
-              <Link href="/auth/register" className={"underline"}>
-                <Button className={""}>Register</Button>
-              </Link>
-            </>
-          )}
+          {user && <ProfileDropdown user={user} />}
+          <div className="hidden items-center gap-4 md:flex">
+            {user ? (
+              <>
+                <Button
+                  onClick={handleSignOut}
+                  variant="secondary"
+                  className={""}
+                >
+                  Sign Out
+                </Button>
+              </>
+            ) : (
+              <>
+                {" "}
+                <Link href="/auth/login">Login</Link>
+                <Link href="/auth/register" className={"underline"}>
+                  <Button className={""}>Register</Button>
+                </Link>
+              </>
+            )}
+          </div>
         </div>
       </header>
       {isMenuOpen && (
         <div className="border-t border-separator md:hidden">
-          <ul className="flex flex-col gap-2 p-4">{links}</ul>
+          <ul className="flex flex-col gap-2 p-4">
+            {links}
+            {user ? (
+              <>
+                <Avatar>
+                  <Avatar.Image
+                    referrerPolicy="no-referrer"
+                    alt={user?.name}
+                    src={user?.image}
+                  />
+                  <Avatar.Fallback>{user?.name[0]}</Avatar.Fallback>
+                </Avatar>
+                <Button
+                  onClick={handleSignOut}
+                  variant="secondary"
+                  className={""}
+                >
+                  Sign Out
+                </Button>
+              </>
+            ) : (
+              <>
+                {" "}
+                <Link href="/auth/login">Login</Link>
+                <Link href="/auth/register" className={"underline"}>
+                  <Button className={""}>Register</Button>
+                </Link>
+              </>
+            )}
+          </ul>
         </div>
       )}
     </nav>

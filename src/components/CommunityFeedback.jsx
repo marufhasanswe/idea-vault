@@ -52,7 +52,6 @@ const CommunityFeedback = ({ ideaId }) => {
         ...prev,
       ]);
 
-      // optional: clear input
       e.target.reset();
     }
     console.log(data);
