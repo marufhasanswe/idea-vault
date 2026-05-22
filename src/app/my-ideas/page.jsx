@@ -1,3 +1,4 @@
+import DeleteIdeaAlert from "@/components/DeleteIdeaAlert";
 import MyIdeaUpdateModal from "@/components/MyIdeaUpdateModal";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
@@ -93,9 +94,7 @@ const MyIdeasPage = async () => {
               <div className="flex gap-2 sm:flex-col sm:items-end">
                 <MyIdeaUpdateModal idea={idea} />
 
-                <button className="rounded-xl bg-red-500/10 px-4 py-1.5 text-sm text-red-500 hover:bg-red-500/20">
-                  Delete
-                </button>
+                <DeleteIdeaAlert idea={idea} />
               </div>
             </div>
           ))}
