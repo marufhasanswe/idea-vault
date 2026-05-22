@@ -163,7 +163,6 @@ const AddIdeaPage = () => {
                 </TextField>
               </div>
 
-              {/* Target Audience */}
               <div className="md:col-span-1">
                 <TextField name="targetAudience" isRequired>
                   <Label className="mb-2 text-sm font-medium">
@@ -179,7 +178,6 @@ const AddIdeaPage = () => {
                 </TextField>
               </div>
 
-              {/* Short Description */}
               <div className="md:col-span-1">
                 <TextField name="shortDescription" isRequired>
                   <Label className="mb-2 text-sm font-medium">
@@ -195,7 +193,6 @@ const AddIdeaPage = () => {
                 </TextField>
               </div>
 
-              {/* Detailed Description */}
               <div className="md:col-span-1">
                 <TextField name="detailedDescription" isRequired>
                   <Label className="mb-2 text-sm font-medium ">
@@ -211,7 +208,6 @@ const AddIdeaPage = () => {
                 </TextField>
               </div>
 
-              {/* Problem Statement */}
               <div className="md:col-span-2">
                 <TextField name="problemStatement" isRequired>
                   <Label className="mb-2 text-sm font-medium">

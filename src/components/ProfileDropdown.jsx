@@ -37,7 +37,7 @@ const ProfileDropdown = ({ user }) => {
           </Dropdown.Item>
           <Dropdown.Item id="profile" textValue="Profile">
             <Link href={"/profile"}>
-              <Label>Profile</Label>
+              <Label>Profile Management</Label>
             </Link>
           </Dropdown.Item>
         </Dropdown.Menu>

@@ -11,6 +11,7 @@ import {
 import Image from "next/image";
 import { redirect } from "next/navigation";
 import ProfileToast from "@/components/ProfileToast";
+import Link from "next/link";
 
 const ProfilePage = async ({ searchParams }) => {
   const sParams = await searchParams;
@@ -144,12 +145,14 @@ const ProfilePage = async ({ searchParams }) => {
 
                 {/* ACTIONS */}
                 <div className="flex flex-col gap-3 sm:flex-row sm:justify-end">
-                  <Button
-                    type="button"
-                    className="h-11 rounded-2xl border border-border bg-background px-6 text-foreground hover:bg-muted"
-                  >
-                    Cancel
-                  </Button>
+                  <Link href={"/"}>
+                    <Button
+                      type="button"
+                      className="h-11 rounded-2xl border border-border bg-background px-6 text-foreground hover:bg-muted"
+                    >
+                      Cancel
+                    </Button>
+                  </Link>
 
                   <Button
                     type="submit"

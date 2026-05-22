@@ -2,6 +2,7 @@ import React from "react";
 import IdeaCard from "@/components/IdeaCard";
 
 const IdeasPage = async () => {
+  await new Promise((resolve) => setTimeout(resolve, 2000));
   const res = await fetch("http://localhost:5000/ideas");
 
   const ideas = await res.json();
