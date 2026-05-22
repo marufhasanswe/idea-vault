@@ -18,14 +18,17 @@ const CommentEditModal = ({ comment, onDelete }) => {
     e.preventDefault();
     const updatedComment = e.target.comment.value;
     const { data: tokenData } = await authClient.token();
-    const res = await fetch(`http://localhost:5000/comment/${comment?._id}`, {
-      method: "PATCH",
-      headers: {
-        "content-type": "application/json",
-        authorization: `Bearer ${tokenData?.token}`,
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/comment/${comment?._id}`,
+      {
+        method: "PATCH",
+        headers: {
+          "content-type": "application/json",
+          authorization: `Bearer ${tokenData?.token}`,
+        },
+        body: JSON.stringify({ comment: updatedComment }),
       },
-      body: JSON.stringify({ comment: updatedComment }),
-    });
+    );
     const data = await res.json();
     if (data?.modifiedCount > 0) {
       toast.success("Successfully comment edited!");

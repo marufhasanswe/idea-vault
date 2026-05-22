@@ -24,14 +24,17 @@ const MyIdeaUpdateModal = ({ idea }) => {
     const updatedData = Object.fromEntries(formData.entries());
 
     const { data: tokenData } = await authClient.token();
-    const res = await fetch(`http://localhost:5000/my-ideas/${id}`, {
-      method: "PATCH",
-      headers: {
-        "content-type": "application/json",
-        authorization: `Bearer ${tokenData?.token}`,
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/my-ideas/${id}`,
+      {
+        method: "PATCH",
+        headers: {
+          "content-type": "application/json",
+          authorization: `Bearer ${tokenData?.token}`,
+        },
+        body: JSON.stringify(updatedData),
       },
-      body: JSON.stringify(updatedData),
-    });
+    );
     const data = await res.json();
     if (data?.modifiedCount > 0) {
       toast.success("Successfully idea data updated!");

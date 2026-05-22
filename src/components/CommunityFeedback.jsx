@@ -14,11 +14,14 @@ const CommunityFeedback = ({ ideaId }) => {
     const fetchData = async () => {
       const { data: tokenData } = await authClient.token();
 
-      const res = await fetch(`http://localhost:5000/comment/${ideaId}`, {
-        headers: {
-          authorization: `Bearer ${tokenData?.token}`,
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/comment/${ideaId}`,
+        {
+          headers: {
+            authorization: `Bearer ${tokenData?.token}`,
+          },
         },
-      });
+      );
 
       const result = await res.json();
 
@@ -41,7 +44,7 @@ const CommunityFeedback = ({ ideaId }) => {
     };
 
     const { data: tokenData } = await authClient.token();
-    const res = await fetch(`http://localhost:5000/comment`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/comment`, {
       method: "POST",
       headers: {
         "content-type": "application/json",

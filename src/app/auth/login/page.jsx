@@ -14,15 +14,11 @@ import {
   TextField,
 } from "@heroui/react";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+import { redirect } from "next/navigation";
 import { FcGoogle } from "react-icons/fc";
 import { toast } from "react-toastify";
 
 const LoginPage = () => {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-
-  const redirectPath = searchParams.get("redirect") || "/";
   const onSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -38,16 +34,15 @@ const LoginPage = () => {
     }
     if (data?.user) {
       toast.success("Successfully logged-in!");
-      router.replace(redirectPath);
+      redirect("/");
     }
   };
 
   const handleGoogleSignIn = async () => {
     const data = await authClient.signIn.social({
       provider: "google",
-      callbackURL: redirectPath,
+      callbackURL: "/",
     });
-    console.log(data);
   };
 
   return (

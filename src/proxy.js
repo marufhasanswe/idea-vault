@@ -1,22 +1,22 @@
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 import { NextResponse } from "next/server";
-import { auth } from "./lib/auth";
 
 export async function proxy(request) {
-  const currentPath = request.nextUrl.pathname;
-  console.log(currentPath);
   const session = await auth.api.getSession({
-    headers: request.headers,
+    headers: await headers(),
   });
-
   if (!session) {
-    const loginUrl = new URL("/auth/login", request.url);
-    loginUrl.searchParams.set("redirect", currentPath);
-
-    return NextResponse.redirect(loginUrl);
+    return NextResponse.redirect(new URL("/auth/login", request.url));
   }
-  return NextResponse.next();
 }
 
 export const config = {
-  matcher: ["/add-idea", "/ideas/:path", "/my-ideas", "/my-interactions"],
+  matcher: [
+    "/add-idea",
+    "/my-ideas",
+    "/my-interactions",
+    "/profile",
+    "/ideas/:path",
+  ],
 };

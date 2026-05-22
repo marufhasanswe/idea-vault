@@ -1,17 +1,8 @@
 import React from "react";
 import IdeaCard from "@/components/IdeaCard";
-import { auth } from "@/lib/auth";
-import { headers } from "next/headers";
 
 const IdeasPage = async () => {
-  const { token } = await auth.api.getToken({
-    headers: await headers(),
-  });
-  const res = await fetch("http://localhost:5000/ideas", {
-    headers: {
-      authorization: `Bearer ${token}`,
-    },
-  });
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/ideas`, {});
 
   const ideas = await res.json();
 

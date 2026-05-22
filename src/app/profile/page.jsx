@@ -38,14 +38,17 @@ const ProfilePage = async ({ searchParams }) => {
     const { token } = await auth.api.getToken({
       headers: await headers(),
     });
-    const res = await fetch(`http://localhost:5000/users/${user?.id}`, {
-      method: "PATCH",
-      headers: {
-        "content-type": "application/json",
-        authorization: `Bearer ${token}`,
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/users/${user?.id}`,
+      {
+        method: "PATCH",
+        headers: {
+          "content-type": "application/json",
+          authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(updatedProfile),
       },
-      body: JSON.stringify(updatedProfile),
-    });
+    );
 
     const data = await res.json();
 

@@ -16,11 +16,14 @@ const MyIdeasPage = async () => {
     headers: await headers(),
   });
 
-  const res = await fetch(`http://localhost:5000/my-ideas/${userId}`, {
-    headers: {
-      authorization: `Bearer ${token}`,
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/my-ideas/${userId}`,
+    {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
     },
-  });
+  );
 
   const myIdeas = await res.json();
 

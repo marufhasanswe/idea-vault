@@ -13,11 +13,14 @@ const MyInteractionsPage = async () => {
     headers: await headers(),
   });
 
-  const res = await fetch(`http://localhost:5000/my-interactions/${user?.id}`, {
-    headers: {
-      authorization: `Bearer ${token}`,
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/my-interactions/${user?.id}`,
+    {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
     },
-  });
+  );
 
   const interactions = await res.json();
 
