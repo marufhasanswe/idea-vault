@@ -115,14 +115,6 @@ const Navbar = () => {
             {links}
             {user ? (
               <>
-                <Avatar>
-                  <Avatar.Image
-                    referrerPolicy="no-referrer"
-                    alt={user?.name}
-                    src={user?.image}
-                  />
-                  <Avatar.Fallback>{user?.name[0]}</Avatar.Fallback>
-                </Avatar>
                 <Button
                   onClick={handleSignOut}
                   variant="secondary"

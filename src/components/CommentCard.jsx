@@ -9,10 +9,12 @@ const CommentCard = ({ comment, onDelete }) => {
         <div>
           <p className="text-sm font-medium">{comment?.authorName}</p>
           <p className="text-xs text-muted-foreground">
-            {Math.ceil(
-              (new Date() - new Date(comment?.createdAt)) / (1000 * 60 * 60),
-            )}{" "}
-            hours ago
+            {new Intl.RelativeTimeFormat("en", { numeric: "auto" }).format(
+              -Math.floor(
+                (new Date() - new Date(comment?.createdAt)) / (1000 * 60 * 60),
+              ),
+              "hour",
+            )}
           </p>
         </div>
 
