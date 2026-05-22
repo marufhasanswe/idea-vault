@@ -8,9 +8,7 @@ import { GiLightBulb } from "react-icons/gi";
 const IdeaDetailsPage = async ({ params }) => {
   const { id } = await params;
 
-  const res = await fetch(`http://localhost:5000/ideas/${id}`, {
-    cache: "no-store",
-  });
+  const res = await fetch(`http://localhost:5000/ideas/${id}`);
 
   const idea = await res.json();
 
@@ -96,7 +94,7 @@ const IdeaDetailsPage = async ({ params }) => {
           </div>
         </div>
 
-        <CommunityFeedback />
+        <CommunityFeedback ideaId={idea._id} />
       </div>
     </section>
   );
