@@ -1,9 +1,17 @@
 import React from "react";
 import IdeaCard from "@/components/IdeaCard";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 
 const IdeasPage = async () => {
-  await new Promise((resolve) => setTimeout(resolve, 2000));
-  const res = await fetch("http://localhost:5000/ideas");
+  const { token } = await auth.api.getToken({
+    headers: await headers(),
+  });
+  const res = await fetch("http://localhost:5000/ideas", {
+    headers: {
+      authorization: `Bearer ${token}`,
+    },
+  });
 
   const ideas = await res.json();
 

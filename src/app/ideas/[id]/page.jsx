@@ -1,5 +1,7 @@
 import CommunityFeedback from "@/components/CommunityFeedback";
+import { auth } from "@/lib/auth";
 import { FileText } from "@gravity-ui/icons";
+import { headers } from "next/headers";
 import Image from "next/image";
 import React from "react";
 import { FiAlertCircle } from "react-icons/fi";
@@ -8,7 +10,15 @@ import { GiLightBulb } from "react-icons/gi";
 const IdeaDetailsPage = async ({ params }) => {
   const { id } = await params;
 
-  const res = await fetch(`http://localhost:5000/ideas/${id}`);
+  const { token } = await auth.api.getToken({
+    headers: await headers(),
+  });
+
+  const res = await fetch(`http://localhost:5000/ideas/${id}`, {
+    headers: {
+      authorization: `Bearer ${token}`,
+    },
+  });
 
   const idea = await res.json();
 

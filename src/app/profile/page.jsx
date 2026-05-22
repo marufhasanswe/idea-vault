@@ -35,11 +35,14 @@ const ProfilePage = async ({ searchParams }) => {
       bio: formData.get("bio"),
     };
 
-    // API CALL
+    const { token } = await auth.api.getToken({
+      headers: await headers(),
+    });
     const res = await fetch(`http://localhost:5000/users/${user?.id}`, {
       method: "PATCH",
       headers: {
         "content-type": "application/json",
+        authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(updatedProfile),
     });

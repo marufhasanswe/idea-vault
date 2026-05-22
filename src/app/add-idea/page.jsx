@@ -1,5 +1,6 @@
 "use client";
 
+import { auth } from "@/lib/auth";
 import { authClient } from "@/lib/auth-client";
 import {
   Button,
@@ -11,6 +12,7 @@ import {
   TextArea,
   TextField,
 } from "@heroui/react";
+import { headers } from "next/headers";
 import { toast } from "react-toastify";
 
 const AddIdeaPage = () => {
@@ -22,10 +24,15 @@ const AddIdeaPage = () => {
     const formData = new FormData(e.currentTarget);
     const ideaData = Object.fromEntries(formData.entries());
     ideaData.userId = userId;
+
+    const { token } = await auth.api.getToken({
+      headers: await headers(),
+    });
     const res = await fetch(`http://localhost:5000/idea`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
+        authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(ideaData),
     });

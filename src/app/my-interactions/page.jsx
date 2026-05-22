@@ -1,18 +1,22 @@
 import { auth } from "@/lib/auth";
 import { Avatar } from "@heroui/react";
 import { headers } from "next/headers";
-import Image from "next/image";
 import Link from "next/link";
 
 const MyInteractionsPage = async () => {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
-
   const user = session?.user;
 
+  const { token } = await auth.api.getToken({
+    headers: await headers(),
+  });
+
   const res = await fetch(`http://localhost:5000/my-interactions/${user?.id}`, {
-    cache: "no-store",
+    headers: {
+      authorization: `Bearer ${token}`,
+    },
   });
 
   const interactions = await res.json();

@@ -6,10 +6,12 @@ import { toast } from "react-toastify";
 const DeleteIdeaAlert = ({ idea }) => {
   const id = idea._id;
   const handleDelete = async () => {
+    const { data: tokenData } = await authClient.token();
     const res = await fetch(`http://localhost:5000/my-ideas/${id}`, {
       method: "DELETE",
       headers: {
         "content-type": "application/json",
+        authorization: `Bearer ${tokenData?.token}`,
       },
     });
     const data = await res.json();

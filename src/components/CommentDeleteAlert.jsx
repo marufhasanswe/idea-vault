@@ -1,4 +1,5 @@
 "use client";
+import { authClient } from "@/lib/auth-client";
 import { AlertDialog, Button } from "@heroui/react";
 import { redirect } from "next/navigation";
 import { toast } from "react-toastify";
@@ -6,10 +7,12 @@ import { toast } from "react-toastify";
 const CommentDeleteAlert = ({ comment, onDelete }) => {
   const id = comment?._id;
   const handleDelete = async () => {
+    const { data: tokenData } = await authClient.token();
     const res = await fetch(`http://localhost:5000/comment/${id}`, {
       method: "DELETE",
       headers: {
         "content-type": "application/json",
+        authorization: `Bearer ${tokenData?.token}`,
       },
     });
     const data = await res.json();

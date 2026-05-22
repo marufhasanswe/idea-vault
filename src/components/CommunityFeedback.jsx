@@ -12,7 +12,13 @@ const CommunityFeedback = ({ ideaId }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await fetch(`http://localhost:5000/comment/${ideaId}`);
+      const { data: tokenData } = await authClient.token();
+
+      const res = await fetch(`http://localhost:5000/comment/${ideaId}`, {
+        headers: {
+          authorization: `Bearer ${tokenData?.token}`,
+        },
+      });
 
       const result = await res.json();
 
@@ -33,11 +39,13 @@ const CommunityFeedback = ({ ideaId }) => {
       comment: comment,
       createdAt: new Date(),
     };
-    console.log(commentData);
+
+    const { data: tokenData } = await authClient.token();
     const res = await fetch(`http://localhost:5000/comment`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
+        authorization: `Bearer ${tokenData?.token}`,
       },
       body: JSON.stringify(commentData),
     });

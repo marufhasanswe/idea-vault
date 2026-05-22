@@ -1,4 +1,5 @@
 "use client";
+import { authClient } from "@/lib/auth-client";
 import {
   Button,
   FieldError,
@@ -16,10 +17,12 @@ const CommentEditModal = ({ comment, onDelete }) => {
   const handleEdit = async (e) => {
     e.preventDefault();
     const updatedComment = e.target.comment.value;
+    const { data: tokenData } = await authClient.token();
     const res = await fetch(`http://localhost:5000/comment/${comment?._id}`, {
       method: "PATCH",
       headers: {
         "content-type": "application/json",
+        authorization: `Bearer ${tokenData?.token}`,
       },
       body: JSON.stringify({ comment: updatedComment }),
     });

@@ -1,4 +1,5 @@
 "use client";
+import { authClient } from "@/lib/auth-client";
 import {
   Button,
   FieldError,
@@ -22,10 +23,12 @@ const MyIdeaUpdateModal = ({ idea }) => {
     const formData = new FormData(e.currentTarget);
     const updatedData = Object.fromEntries(formData.entries());
 
+    const { data: tokenData } = await authClient.token();
     const res = await fetch(`http://localhost:5000/my-ideas/${id}`, {
       method: "PATCH",
       headers: {
         "content-type": "application/json",
+        authorization: `Bearer ${tokenData?.token}`,
       },
       body: JSON.stringify(updatedData),
     });
