@@ -11,13 +11,29 @@ import {
   TextField,
   Select,
 } from "@heroui/react";
+import { redirect } from "next/navigation";
 import { BiEdit } from "react-icons/bi";
+import { toast } from "react-toastify";
 const MyIdeaUpdateModal = ({ idea }) => {
-  const handleUpdateIdea = (e) => {
+  const id = idea._id;
+
+  const handleUpdateIdea = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const updatedData = Object.fromEntries(formData.entries());
-    console.log(updatedData);
+
+    const res = await fetch(`http://localhost:5000/my-ideas/${id}`, {
+      method: "PATCH",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(updatedData),
+    });
+    const data = await res.json();
+    if (data?.modifiedCount > 0) {
+      toast.success("Successfully idea data updated!");
+      redirect("/my-ideas");
+    }
   };
   return (
     <Modal>
@@ -261,10 +277,11 @@ const MyIdeaUpdateModal = ({ idea }) => {
 
                   {/* Submit Button */}
                   <Button
+                    slot={"close"}
                     type="submit"
                     className="h-12 w-full rounded-2xl bg-linear-to-r from-[#4BB8FA] to-[#2C5EAD] text-base font-semibold text-primary-foreground transition hover:opacity-90"
                   >
-                    Submit Startup Idea
+                    Update Idea
                   </Button>
                 </form>
               </Surface>
