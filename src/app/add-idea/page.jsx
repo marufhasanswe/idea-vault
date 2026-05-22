@@ -1,5 +1,6 @@
 "use client";
 
+import { authClient } from "@/lib/auth-client";
 import {
   Button,
   FieldError,
@@ -13,11 +14,14 @@ import {
 import { toast } from "react-toastify";
 
 const AddIdeaPage = () => {
+  const { data: session } = authClient.useSession();
+
+  const userId = session?.user?.id;
   const handleAddIdea = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const ideaData = Object.fromEntries(formData.entries());
-
+    ideaData.userId = userId;
     const res = await fetch(`http://localhost:5000/idea`, {
       method: "POST",
       headers: {
